@@ -1,0 +1,84 @@
+{{ if .IsHome }}
+<style>
+  #ink-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    overflow: hidden;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    justify-items: center;
+    background: #11141d;
+    color: #e6ddd0;
+    cursor: pointer;
+    animation: ink-veil 2.8s linear forwards;
+  }
+  #ink-intro span {
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+    align-self: center;
+    font: 400 clamp(16px, 1.8vw, 27px)/1.1 "Songti SC", "Noto Serif CJK SC", SimSun, serif;
+    letter-spacing: .54em;
+    opacity: 0;
+    animation: ink-thread 1.85s ease-out var(--delay) both;
+  }
+  @keyframes ink-thread {
+    from { opacity: 0; transform: translateY(calc(var(--offset) - 32px)); }
+    35% { opacity: var(--ink); }
+    to { opacity: var(--ink); transform: translateY(var(--offset)); }
+  }
+  @keyframes ink-veil {
+    0%, 72% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+  @media (prefers-reduced-motion: reduce) { #ink-intro { display: none; } }
+</style>
+<script>
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const key = 'itsukazuki-ink-intro-v1';
+  try { if (sessionStorage.getItem(key)) return; } catch {}
+  // 每一行引号里的文字是一条竖排文字链。
+  const lines = [
+    '黄昏时我拆开一封没有署名的信',
+    '墨水沿着纸纹缓慢洇开',
+    '我把白日里遗漏的词一枚枚拾起',
+    '有些句子只在夜里显影',
+    '风经过书页留下细小的折痕',
+    '你也在这里停留了一瞬',
+    '于是我把这一页轻轻翻开'
+  ];
+  function show() {
+    const veil = document.createElement('div');
+    veil.id = 'ink-intro';
+    veil.setAttribute('aria-hidden', 'true');
+    const count = Math.max(5, Math.min(23, Math.floor(innerWidth / 48)));
+    for (let i = 0; i < count; i++) {
+      const column = document.createElement('span');
+      column.textContent = lines[i % lines.length];
+      column.style.setProperty('--offset', ((i * 17) % 37 - 18) + 'vh');
+      column.style.setProperty('--delay', ((i * 7) % 11) * 38 + 'ms');
+      column.style.setProperty('--ink', String(0.45 + ((i * 3) % 6) / 12));
+      veil.append(column);
+    }
+    document.body.prepend(veil);
+    try { sessionStorage.setItem(key, '1'); } catch {}
+    function finish() {
+      veil.remove();
+      document.removeEventListener('keydown', finish);
+    }
+    veil.addEventListener('click', finish);
+    document.addEventListener('keydown', finish);
+    setTimeout(finish, 2850);
+  }
+  if (document.body) show();
+  else {
+    const observer = new MutationObserver(() => {
+      if (document.body) { observer.disconnect(); show(); }
+    });
+    observer.observe(document.documentElement, { childList: true });
+  }
+})();
+</script>
+{{ end }}
