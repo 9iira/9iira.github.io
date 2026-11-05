@@ -8,9 +8,10 @@ menu:
 comments: false
 links:
   - title: 提问箱 ↗
+  - description: "Wavebox"
     website: "https://wavebox.me/wave/cshvuzs62k3qw5lj/"
 ---
 
-你好，欢迎来到「光と影と五月月」。
+你好呀。
+本站的主人是一只叫做久城的比格。
 
-[【wavebox】](https://wavebox.me/wave/cshvuzs62k3qw5lj/)
