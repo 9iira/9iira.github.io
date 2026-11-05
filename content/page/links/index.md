@@ -1,5 +1,5 @@
 ---
-title: About Me
+title: About
 layout: about
 site_intro: |
   0000
