@@ -1,0 +1,24 @@
+{{ define "body-class" }}article-page{{ end }}
+
+{{ define "main" }}
+  {{ partial "article/article.html" . }}
+
+  {{ with .Params.site_intro }}
+    <article class="main-article">
+      <header class="article-header">
+        <div class="article-details">
+          <h2 class="article-title">About This Site</h2>
+        </div>
+      </header>
+      <section class="article-content">
+        {{ . | markdownify }}
+      </section>
+    </article>
+  {{ end }}
+
+  {{ with .Params.links }}
+    {{ partial "article/components/links" $ }}
+  {{ end }}
+
+  {{ partialCached "footer/footer" . }}
+{{ end }}
