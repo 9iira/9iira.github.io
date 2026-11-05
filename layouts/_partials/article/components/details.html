@@ -28,6 +28,18 @@
         {{ end }}
     </div>
 
+
+    {{ with $Page.GetTerms "tags" }}
+      <div class="post-header-tags"
+           style="display: flex; flex-wrap: wrap; gap: 0.4rem 1rem;
+              font-size: 1.3rem; line-height: 1.5;
+              color: var(--card-text-color-tertiary);">
+        {{ range . }}
+          <a href="{{ .RelPermalink }}" style="color: inherit;">#{{ .LinkTitle }}</a>
+        {{ end }}
+  </div>
+{{ end }}
+    
     {{ $showReadingTime := $Page.Params.readingTime | default ($Page.Site.Params.article.readingTime) }}
     {{ $showDate := not $Page.Date.IsZero }}
     {{ $showTime := or $showDate $showReadingTime }}
