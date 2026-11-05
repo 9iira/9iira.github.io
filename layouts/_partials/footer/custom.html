@@ -1,0 +1,20 @@
+{{ if and .IsPage (eq .Section "post") }}
+<div id="post-kudos" style="text-align: center; margin: 2rem 0;">
+  <span class="likebtn-wrapper"
+        data-identifier="{{ .RelPermalink }}"
+        data-i18n_like="Kudos"
+        data-i18n_after_like="功德+1"
+        data-theme="heartcross"
+        data-dislike_enabled="false">
+  </span>
+</div>
+
+<script>
+  const articleBody = document.querySelector(".main-article .article-content");
+  const kudos = document.getElementById("post-kudos");
+  if (articleBody && kudos) {
+    articleBody.append(kudos);
+  }
+</script>
+<script async src="https://w.likebtn.com/js/w/widget.js"></script>
+{{ end }}
