@@ -1,3 +1,37 @@
 :root:not([data-scheme="dark"]) {
   --body-background: #f7f4ee;
 }
+
+/* 小说正文里的场景分隔符 */
+.main-article .article-content hr {
+  border: 0;
+  width: 100%;
+  height: auto;
+  margin: 2.5em auto;
+  background: transparent;
+  text-align: center;
+  overflow: visible;
+
+  &::after {
+    content: "· − ·";
+    color: var(--card-text-color-tertiary);
+    font-size: 0.9em;
+    letter-spacing: 0.45em;
+  }
+}
+
+
+/* 浅色模式：暖灰底，纸白卡片 */
+:root:not([data-scheme="dark"]) {
+  --body-background: #eae7e1;
+  --card-background: #fffdf8;
+  --card-border-radius: 5px;
+}
+
+/* 首页文章卡片和文章内页：柔和的纸张边缘 */
+:root:not([data-scheme="dark"]) .article-list article,
+:root:not([data-scheme="dark"]) .main-article {
+  box-shadow:
+    0 0 0 1px rgba(70, 60, 45, 0.06),
+    0 2px 6px rgba(70, 60, 45, 0.04);
+}
