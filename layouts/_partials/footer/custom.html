@@ -29,3 +29,35 @@
 </script>
 <script async src="https://w.likebtn.com/js/w/widget.js"></script>
 {{ end }}
+
+// 时间统计和字数统计
+{{ $totalWords := 0 }}
+{{ range where .Site.RegularPages "Section" "post" }}
+  {{ $totalWords = add $totalWords .WordCount }}
+{{ end }}
+
+<div id="blog-stats" class="powerby" style="margin-top: 0.4em;">
+  <span id="blog-uptime"></span>
+  文章共 {{ lang.FormatNumber 0 $totalWords }} 字
+</div>
+
+<script>
+(() => {
+  const stats = document.getElementById("blog-stats");
+  const copyright = document.querySelector(".site-footer .copyright");
+  if (copyright) copyright.after(stats);
+
+  // 开站时间：年-月-日，T 后面是时:分:秒，+01:00 是斯德哥尔摩冬令时。
+  const openedAt = Date.parse("2026-11-04T00:00:00+01:00");
+  const uptime = document.getElementById("blog-uptime");
+
+  function updateUptime() {
+    const hours = Math.max(0, Math.floor((Date.now() - openedAt) / 3600000));
+    const days = Math.floor(hours / 24);
+    uptime.textContent = `博客已运行 ${days} 天 ${hours % 24} 小时 · `;
+  }
+
+  updateUptime();
+  setInterval(updateUptime, 60000);
+})();
+</script>
