@@ -9,17 +9,18 @@
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     justify-items: center;
-    background: #11141d;
-    color: #e6ddd0;
+    background: #fff;
+    color: #343944;
     cursor: pointer;
     animation: ink-veil 2.8s linear forwards;
   }
   #ink-intro span {
     writing-mode: vertical-rl;
-    white-space: nowrap;
+    text-orientation: sideways;
+    white-space: pre;
     align-self: center;
-    font: 400 clamp(16px, 1.8vw, 27px)/1.1 "Songti SC", "Noto Serif CJK SC", SimSun, serif;
-    letter-spacing: .54em;
+    font: 500 clamp(14px, 1.4vw, 20px)/1 Consolas, monospace;
+    letter-spacing: .12em;
     opacity: 0;
     animation: ink-thread 1.85s ease-out var(--delay) both;
   }
@@ -37,17 +38,17 @@
 <script>
 (() => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const key = 'itsukazuki-ink-intro-v1';
+  const key = 'itsukazuki-morse-intro-v2';
   try { if (sessionStorage.getItem(key)) return; } catch {}
-  // 每一行引号里的文字是一条竖排文字链。
+  // 每个空格分隔一个字母。下面依次是 MOON、INK、NIGHT、TIDE、ECHO、HOME、STAR。
   const lines = [
-    '黄昏时我拆开一封没有署名的信',
-    '墨水沿着纸纹缓慢洇开',
-    '我把白日里遗漏的词一枚枚拾起',
-    '有些句子只在夜里显影',
-    '风经过书页留下细小的折痕',
-    '你也在这里停留了一瞬',
-    '于是我把这一页轻轻翻开'
+    '-- --- --- -.',
+    '.. -. -.-',
+    '-. .. --. .... -',
+    '- .. -.. .',
+    '. -.-. .... ---',
+    '.... --- -- .',
+    '... - .- .-.'
   ];
   function show() {
     const veil = document.createElement('div');
@@ -56,10 +57,10 @@
     const count = Math.max(5, Math.min(23, Math.floor(innerWidth / 48)));
     for (let i = 0; i < count; i++) {
       const column = document.createElement('span');
-      column.textContent = lines[i % lines.length];
+      column.textContent = lines[i % lines.length].replaceAll('.', '·').replaceAll('-', '−');
       column.style.setProperty('--offset', ((i * 17) % 37 - 18) + 'vh');
       column.style.setProperty('--delay', ((i * 7) % 11) * 38 + 'ms');
-      column.style.setProperty('--ink', String(0.45 + ((i * 3) % 6) / 12));
+      column.style.setProperty('--ink', String(0.23 + ((i * 7) % 5) * 0.065));
       veil.append(column);
     }
     document.body.prepend(veil);
@@ -82,3 +83,4 @@
 })();
 </script>
 {{ end }}
+
