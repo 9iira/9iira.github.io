@@ -35,3 +35,31 @@
     0 0 0 1px rgba(70, 60, 45, 0.06),
     0 2px 6px rgba(70, 60, 45, 0.04);
 }
+
+// 鼠标选择颜色
+::selection {
+  background-color: #34495E;
+  color: #FFFFFF;
+}
+
+/* 浅色模式下的墨蓝色点缀 */
+:root:not([data-scheme="dark"]) {
+  --accent-color: #34495E;
+  --accent-color-darker: #253646;
+  --accent-color-text: #FFFFFF;
+
+  /* 正文链接、侧栏当前菜单、标题下的小标签 */
+  .article-content a,
+  .menu li.current a,
+  .post-header-tags a {
+    color: var(--accent-color);
+  }
+
+  /* 指针移上去时，用下划线提示可以点击 */
+  .article-content a:hover,
+  .post-header-tags a:hover {
+    color: var(--accent-color-darker);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+}
