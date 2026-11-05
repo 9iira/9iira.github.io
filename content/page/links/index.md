@@ -1,5 +1,8 @@
 ---
 title: About Me
+layout: about
+site_intro: |
+  0000
 menu:
   main:
     weight: 4
