@@ -7,7 +7,7 @@ menu:
       icon: user
 comments: false
 links:
-  - title: 提问箱 ↗
+  - title: 提问箱
   - description: "Wavebox"
     website: "https://wavebox.me/wave/cshvuzs62k3qw5lj/"
 ---
