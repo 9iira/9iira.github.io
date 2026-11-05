@@ -35,7 +35,7 @@
               font-size: 1.3rem; line-height: 1.5;
               color: var(--card-text-color-tertiary);">
         {{ range . }}
-          <a href="{{ .RelPermalink }}" style="color: inherit;">#{{ .LinkTitle }}</a>
+          <a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
         {{ end }}
   </div>
 {{ end }}
