@@ -1,0 +1,27 @@
+{{ define "body-class" }}article-page{{ end }}
+
+{{ define "main" }}
+  <style>
+    .about-cards { display: flex; flex-direction: column; gap: var(--section-separation, 40px); }
+    .about-cards > .main-article { overflow: hidden; }
+    .about-cards .article-content { padding: var(--card-padding, 30px); }
+    .about-cards .article-content > :first-child { margin-top: 0; }
+    .about-cards .article-content > :last-child { margin-bottom: 0; }
+    .about-page-title { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  </style>
+
+  <h1 class="about-page-title">{{ .Title }}</h1>
+  <div class="about-cards">
+    {{ range split .RawContent "<!-- card -->" }}
+      {{ with trim . " \t\r\n" }}
+        <article class="main-article">
+          <div class="article-content">
+            {{ $.RenderString (dict "display" "block") . }}
+          </div>
+        </article>
+      {{ end }}
+    {{ end }}
+  </div>
+
+  {{ partialCached "footer/footer" . }}
+{{ end }}
