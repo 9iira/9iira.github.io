@@ -48,7 +48,7 @@ SortBy              = "default"
     toggle  = true
     default = "auto"
 
-## Comments
+
 [comments]
     enabled = true
     provider = "waline"
@@ -56,7 +56,12 @@ SortBy              = "default"
 [comments.waline]
     serverURL = "https://comments.itsukazuki.homes"
     lang = "zh-CN"
-    placeholder = "留个评论再走吧；；"
+    placeholder = "留下点什么再走吧；；"
+    meta = ["nick", "mail"]
+    search = false
+
+[comments.waline.locale]
+    submit = "Wer!"
 
     # See all the available configurations at https://github.com/CaiJimmy/hugo-theme-stack/blob/master/config/_default/params.toml
     # Copy the configurations you need from there and paste it here.
