@@ -56,12 +56,13 @@ SortBy              = "default"
 [comments.waline]
     serverURL = "https://comments.itsukazuki.homes"
     lang = "zh-CN"
-    placeholder = "留下点什么再走吧；；"
     meta = ["nick", "mail"]
     search = false
+    placeholder = "留下点什么再走吧；；"
 
 [comments.waline.locale]
     submit = "Wer!"
+    empty = "这里现在什么都没有；；"
 
     # See all the available configurations at https://github.com/CaiJimmy/hugo-theme-stack/blob/master/config/_default/params.toml
     # Copy the configurations you need from there and paste it here.
