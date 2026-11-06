@@ -13,7 +13,7 @@
     url        = "https://archiveofourown.org/users/KujYou"
 
     [social.params]
-        icon = "link"
+        icon = "assets/img/330px-Logo_Archive_of_Our_Own.svg.webp"
 
 [[social]]
     identifier = "twitter"
