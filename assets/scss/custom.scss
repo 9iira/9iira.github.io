@@ -36,7 +36,7 @@
     0 2px 6px rgba(70, 60, 45, 0.04);
 }
 
-// 鼠标选择颜色
+/* 鼠标选择颜色 */
 ::selection {
   background-color: #34495E;
   color: #FFFFFF;
@@ -62,4 +62,10 @@
     text-decoration: underline;
     text-underline-offset: 0.18em;
   }
+}
+
+/* 评论区使用博客的灰蓝色 */
+#waline {
+  --waline-theme-color: #34495E;
+  --waline-active-color: #253646;
 }
