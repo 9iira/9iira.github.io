@@ -1,8 +1,10 @@
 ---
 title: "Flow"
 date: 2026-11-05
-tags:
+categories:
   - 同人
+  - General Audience
+tags:
   - 冬彰
 ---
 
