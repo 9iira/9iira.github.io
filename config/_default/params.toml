@@ -11,7 +11,7 @@ SortBy              = "default"
 
 [footer]
     since      = 2026
-    customText = ""
+    customText = "0000000000"
 
 [dateFormat]
     published   = ":date_full"
