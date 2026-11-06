@@ -5,12 +5,22 @@
 {{ end }}
 <div id="blog-stats" class="powerby" style="margin-top: 0.4em;">
   <span id="blog-uptime"></span>
-  共 {{ lang.FormatNumber 0 $totalWords }} 字
+  共 {{ lang.FormatNumber 1 (div (float $totalWords) 1000) }} 千字
 </div><script>
 (() => {
   const stats = document.getElementById("blog-stats");
   const copyright = document.querySelector(".site-footer .copyright");
-  if (copyright) copyright.after(stats);
+
+  if (copyright) {
+    if (!copyright.querySelector(".rights-reserved")) {
+      const rights = document.createElement("span");
+      rights.className = "rights-reserved";
+      rights.textContent = " · All Rights Reserved.";
+      copyright.appendChild(rights);
+    }
+
+    copyright.after(stats);
+  }
 
   // 开站时间：年-月-日，T 后面是时:分:秒，+01:00 是斯德哥尔摩冬令时。
   const openedAt = Date.parse("2026-11-04T00:00:00+01:00");
