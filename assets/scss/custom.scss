@@ -173,3 +173,21 @@ html[data-scheme="dark"] #waline .wl-reaction {
     transition: none;
   }
 }
+
+
+/* 页面至少占满一屏 */
+.main-container {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* 让正文区域撑满可用高度 */
+.main-container > main.main {
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* 将页尾推到正文区域最下面 */
+main.main > footer.site-footer {
+  margin-top: auto;
+}
