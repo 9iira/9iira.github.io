@@ -50,8 +50,13 @@ SortBy              = "default"
 
 ## Comments
 [comments]
-    enabled  = true
-    provider = "disqus"
+    enabled = true
+    provider = "waline"
+
+[comments.waline]
+    serverURL = "https://comments.itsukazuki.homes"
+    lang = "zh-CN"
+    placeholder = "留个评论再走吧；；"
 
     # See all the available configurations at https://github.com/CaiJimmy/hugo-theme-stack/blob/master/config/_default/params.toml
     # Copy the configurations you need from there and paste it here.
