@@ -59,10 +59,12 @@ SortBy              = "default"
     meta = ["nick", "mail"]
     search = false
     placeholder = "留下点什么再走吧；；"
+    reaction = ["data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20.4s-7.6-4.7-7.6-9.8a4.3 4.3 0 0 1 7.6-2.7 4.3 4.3 0 0 1 7.6 2.7c0 5.1-7.6 9.8-7.6 9.8z' fill='none' stroke='%23444' stroke-width='1.6'/%3E%3C/svg%3E"]
 
 [comments.waline.locale]
     submit = "Wer!"
     empty = "这里现在什么都没有；；"
+    reaction0 = "Kudos"
 
     # See all the available configurations at https://github.com/CaiJimmy/hugo-theme-stack/blob/master/config/_default/params.toml
     # Copy the configurations you need from there and paste it here.
