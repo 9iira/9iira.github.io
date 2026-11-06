@@ -230,4 +230,13 @@ main.main > footer.site-footer {
   content: "☾";
 }
 
+#dark-mode-toggle::after {
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+}
 
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #dark-mode-toggle:hover::after {
+    transform: rotate(15deg);
+  }
+}
