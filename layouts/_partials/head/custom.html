@@ -40,15 +40,10 @@
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const key = 'itsukazuki-morse-intro-v2';
   try { if (sessionStorage.getItem(key)) return; } catch {}
-  // 每个空格分隔一个字母。下面依次是 MOON、INK、NIGHT、TIDE、ECHO、HOME、STAR。
+    // I WANTED TO DANCE IN YOUR PULSE
+  // 空格分隔字母，斜线分隔单词。
   const lines = [
-    '-- --- --- -.',
-    '.. -. -.-',
-    '-. .. --. .... -',
-    '- .. -.. .',
-    '. -.-. .... ---',
-    '.... --- -- .',
-    '... - .- .-.'
+    '.. / .-- .- -. - . -.. / - --- / -.. .- -. -.-. . / .. -. / -.-- --- ..- .-. / .--. ..- .-.. ... .'
   ];
   function show() {
     const veil = document.createElement('div');
