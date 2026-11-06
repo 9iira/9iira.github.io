@@ -30,7 +30,7 @@
 <script async src="https://w.likebtn.com/js/w/widget.js"></script>
 {{ end }}
 
-// 时间统计和字数统计
+/* 时间统计和字数统计 */
 {{ $totalWords := 0 }}
 {{ range where .Site.RegularPages "Section" "post" }}
   {{ $totalWords = add $totalWords .WordCount }}
@@ -38,7 +38,7 @@
 
 <div id="blog-stats" class="powerby" style="margin-top: 0.4em;">
   <span id="blog-uptime"></span>
-  文章共 {{ lang.FormatNumber 0 $totalWords }} 字
+  共 {{ lang.FormatNumber 0 $totalWords }} 字
 </div>
 
 <script>
