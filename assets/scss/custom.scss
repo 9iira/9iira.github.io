@@ -28,6 +28,22 @@
   --card-border-radius: 5px;
 }
 
+/* 深色模式：深蓝灰背景 */
+:root[data-scheme="dark"] {
+  --body-background: #202832;
+  --card-background: #2A3542;
+
+  /* 正文和辅助文字 */
+  --card-text-color-main: #E3E8EE;
+  --card-text-color-secondary: #BBC6D2;
+  --card-text-color-tertiary: #A6B3C2;
+
+  /* 深色模式用浅灰蓝点缀，保证清晰 */
+  --accent-color: #B7CBE0;
+  --accent-color-darker: #D3E0ED;
+  --accent-color-text: #202832;
+}
+
 /* 首页文章卡片和文章内页：柔和的纸张边缘 */
 :root:not([data-scheme="dark"]) .article-list article,
 :root:not([data-scheme="dark"]) .main-article {
