@@ -208,3 +208,18 @@ main.main > footer.site-footer {
 :root[data-scheme="dark"] #dark-mode-toggle::after {
   content: "☾";
 }
+
+/* 开关和太阳／月亮紧挨着显示 */
+#dark-mode-toggle {
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+/* 隐藏中间的模式文字，避免占位 */
+#dark-mode-toggle > span {
+  display: none;
+}
+
+#dark-mode-toggle::after {
+  margin: 0;
+}
