@@ -114,3 +114,9 @@ comments: true
 “嗯。”努力伸长手臂抱住那一大团，冬弥也缓缓闭上双眼。
 
 “晚安。”
+
+
+<details>  
+<summary>一些作者碎碎念</summary>  
+这里有个小段子但是我不记得具体是什么了等待ao3复活
+</details>
