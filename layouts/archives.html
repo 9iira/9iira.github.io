@@ -1,0 +1,65 @@
+{{ define "body-class" }}template-archives{{ end }}
+{{ define "main" }}
+<style>
+  .archive-taxonomies { display: flex; flex-direction: column; gap: 24px; }
+  .archive-taxonomy-title { margin: 0 0 12px; }
+  .archive-term-links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .archive-term-links a {
+    display: inline-flex; align-items: center; gap: 8px;
+    max-width: 100%; box-sizing: border-box;
+    padding: 9px 14px; border-radius: var(--card-border-radius, 5px);
+    background: var(--card-background); color: var(--card-text-color-main);
+    box-shadow: var(--shadow-l1);
+    font-size: 15px; line-height: 1.5;
+  }
+  .archive-term-links a span { min-width: 0; overflow-wrap: anywhere; }
+  .archive-term-links a small { color: var(--card-text-color-secondary); }
+  .archive-term-links a:hover { color: var(--accent-color); }
+  .archive-term-links a:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
+  .archive-post-meta { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+</style>
+
+<header class="archive-taxonomies">
+  {{ range slice (dict "key" "categories" "label" "分类 · Categories") (dict "key" "tags" "label" "标签 · Tags") }}
+    {{ $label := .label }}
+    {{ with $.Site.GetPage .key }}
+      {{ with .Pages.ByTitle }}
+      <section>
+        <h2 class="section-title archive-taxonomy-title">{{ $label }}</h2>
+        <nav class="archive-term-links" aria-label="{{ $label }}">
+          {{ range . }}
+          <a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><small>({{ len .RegularPages }})</small></a>
+          {{ end }}
+        </nav>
+      </section>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</header>
+
+{{ $pages := partial "helper/pages.html" .Site.Home }}
+{{ range $pages.GroupByDate "2006" }}
+  {{ $id := lower (replace .Key " " "-") }}
+  <div class="archives-group" id="{{ $id }}">
+    <h2 class="archives-date section-title"><a href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></h2>
+    <div class="article-list--compact">
+      {{ range .Pages }}
+      <article>
+        <a href="{{ .RelPermalink }}">
+          <div class="article-details">
+            <h2 class="article-title">{{ .Title }}</h2>
+            <footer class="article-meta archive-post-meta">
+              {{ if not .Date.IsZero }}
+              <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format .Site.Params.dateFormat.published }}</time>
+              {{ end }}
+              <span>{{ lang.FormatNumber 0 .WordCount }} 字</span>
+            </footer>
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+{{ partialCached "footer/footer" . }}
+{{ end }}
