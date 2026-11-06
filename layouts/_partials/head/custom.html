@@ -85,3 +85,45 @@
 </script>
 {{ end }}
 
+
+{{ $lightIcon := resources.Get "img/favicon-light.png" }}
+{{ $darkIcon := resources.Get "img/favicon-dark.png" }}
+
+{{ if and $lightIcon $darkIcon }}
+<script>
+(() => {
+  const lightIcon = "{{ $lightIcon.RelPermalink }}";
+  const darkIcon = "{{ $darkIcon.RelPermalink }}";
+
+  function updateFavicon() {
+    const isDark =
+      document.documentElement.dataset.scheme === "dark";
+
+    const url = isDark ? darkIcon : lightIcon;
+    let icons = document.querySelectorAll('link[rel~="icon"]');
+
+    if (!icons.length) {
+      const icon = document.createElement("link");
+      icon.rel = "icon";
+      document.head.appendChild(icon);
+      icons = [icon];
+    }
+
+    icons.forEach(icon => {
+      icon.type = "image/png";
+      icon.href = url;
+    });
+  }
+
+  updateFavicon();
+
+  new MutationObserver(updateFavicon).observe(
+    document.documentElement,
+    {
+      attributes: true,
+      attributeFilter: ["data-scheme"]
+    }
+  );
+})();
+</script>
+{{ end }}
