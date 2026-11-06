@@ -3,7 +3,7 @@ title: About
 layout: about-cards
 menu:
     main:
-        weight: 5
+        weight: 4
         params:
             icon: user
 comments: false
@@ -11,7 +11,9 @@ comments: false
 
 ## About Me
 
-这里写个人介绍，可以使用 **加粗**、链接和其他 Markdown 格式。
+你好呀。
+本站的主人是一只叫做久城的比格。
+因为是比格，所以不推荐使用人类常理进行推测。
 
 <!-- card -->
 
