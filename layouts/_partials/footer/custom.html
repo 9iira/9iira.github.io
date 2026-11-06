@@ -1,30 +1,38 @@
-
-
-
 {{ $totalWords := 0 }}
 {{ range where .Site.RegularPages "Section" "post" }}
   {{ $totalWords = add $totalWords .WordCount }}
 {{ end }}
 
-<div id="blog-stats" class="powerby" style="margin-top: 0.4em;">
-  <span id="blog-uptime"></span>
-  共 {{ lang.FormatNumber 0 $totalWords }} 字
-</div>
+{{ $currentYear := now.Year }}
+
+<footer class="site-footer">
+  <section class="copyright">
+    &copy;
+    {{ if gt $currentYear 2026 }}2026–{{ end }}{{ $currentYear }}
+    {{ .Site.Title }}. All Rights Reserved.
+  </section>
+
+  <section class="powerby" style="margin-top: 0.4em;">
+    <span id="blog-uptime"></span>
+    共 {{ lang.FormatNumber 1 (div $totalWords 1000.0) }} 千字
+  </section>
+</footer>
 
 <script>
 (() => {
-  const stats = document.getElementById("blog-stats");
-  const copyright = document.querySelector(".site-footer .copyright");
-  if (copyright) copyright.after(stats);
-
-  // 开站时间：年-月-日，T 后面是时:分:秒，+01:00 是斯德哥尔摩冬令时。
   const openedAt = Date.parse("2026-11-04T00:00:00+01:00");
   const uptime = document.getElementById("blog-uptime");
+  if (!uptime) return;
 
   function updateUptime() {
-    const hours = Math.max(0, Math.floor((Date.now() - openedAt) / 3600000));
+    const hours = Math.max(
+      0,
+      Math.floor((Date.now() - openedAt) / 3600000)
+    );
     const days = Math.floor(hours / 24);
-    uptime.textContent = `博客已运行 ${days} 天 ${hours % 24} 小时 · `;
+
+    uptime.textContent =
+      `博客已运行 ${days} 天 ${hours % 24} 小时 · `;
   }
 
   updateUptime();
