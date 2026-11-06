@@ -191,3 +191,20 @@ html[data-scheme="dark"] #waline .wl-reaction {
 main.main > footer.site-footer {
   margin-top: auto;
 }
+
+/* 夜间模式开关旁的状态图标 */
+#dark-mode-toggle::after {
+  content: "☀";
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: "Segoe UI Symbol", "Apple Symbols", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  color: currentColor;
+}
+
+/* 深色模式显示月亮 */
+:root[data-scheme="dark"] #dark-mode-toggle::after {
+  content: "☾";
+}
