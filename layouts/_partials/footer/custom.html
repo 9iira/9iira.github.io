@@ -36,3 +36,73 @@
   setInterval(updateUptime, 60000);
 })();
 </script>
+
+{{ if and .IsPage (eq .Section "post") }}
+<style>
+  #reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #34495E;
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 2000;
+  }
+
+  :root[data-scheme="dark"] #reading-progress {
+    background: #B7CBE0;
+  }
+</style>
+
+<div id="reading-progress" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const bar = document.getElementById("reading-progress");
+  const article = document.querySelector(".main-article .article-content");
+  if (!bar || !article) return;
+
+  let scheduled = false;
+
+  function update() {
+    scheduled = false;
+
+    const rect = article.getBoundingClientRect();
+    const scrollY = window.scrollY;
+    const start = Math.max(0, rect.top + scrollY - 80);
+    const end = rect.bottom + scrollY - window.innerHeight;
+
+    // 正文能在一屏内显示时，进入阅读位置即视为读完。
+    const progress = end > start
+      ? (scrollY - start) / (end - start)
+      : (scrollY >= end ? 1 : 0);
+
+    bar.style.transform =
+      `scaleX(${Math.max(0, Math.min(1, progress))})`;
+  }
+
+  function scheduleUpdate() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+  window.addEventListener("load", scheduleUpdate);
+  window.addEventListener("pageshow", scheduleUpdate);
+
+  // 图片、字体加载导致正文高度变化时，重新计算。
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(article);
+    observer.observe(document.body);
+  }
+
+  update();
+})();
+</script>
+{{ end }}
