@@ -1,0 +1,32 @@
+{{ define "body-class" }}article-page{{ end }}
+{{ define "main" }}
+{{ $current := . }}
+{{ $work := .Site.GetPage .Params.work }}
+{{ if not $work }}{{ errorf "Chapter %s: work must point to an existing work, e.g. /post/my-story" .Path }}{{ end }}
+{{ with $work }}
+{{ partial "story/style" $current }}
+{{ $chapters := partial "story/chapters" . }}
+{{ $position := -1 }}
+{{ range $i, $chapter := $chapters }}
+  {{ if eq $chapter.RelPermalink $current.RelPermalink }}{{ $position = $i }}{{ end }}
+{{ end }}
+{{ if lt $position 0 }}{{ errorf "Chapter %s is not included in work %s. Check chapter_section." $current.Path .Path }}{{ end }}
+<nav class="story-panel chapter-navigation" aria-label="章节选择">
+  <a class="chapter-book-link" href="{{ .RelPermalink }}">{{ .Title }} · 目录</a>
+  <label for="chapter-select">章节</label>
+  <select id="chapter-select" onchange="if(this.value) window.location.assign(this.value)">
+    {{ range $chapters }}<option value="{{ .RelPermalink }}"{{ if eq .RelPermalink $current.RelPermalink }} selected{{ end }}>{{ .Title }}</option>{{ end }}
+  </select>
+</nav>
+{{ partial "article/article" $current }}
+<nav class="story-panel chapter-navigation chapter-bottom" aria-label="上一章和下一章">
+  {{ if gt $position 0 }}{{ with index $chapters (sub $position 1) }}<a rel="prev" href="{{ .RelPermalink }}">← 上一章</a>{{ end }}{{ end }}
+  <a href="{{ .RelPermalink }}">返回作品目录</a>
+  {{ if lt (add $position 1) (len $chapters) }}{{ with index $chapters (add $position 1) }}<a rel="next" href="{{ .RelPermalink }}">下一章 →</a>{{ end }}{{ end }}
+</nav>
+{{ if not (eq $current.Params.comments false) }}{{ partial "comments/include" $current }}{{ end }}
+{{ partialCached "footer/footer" $current }}
+{{ partialCached "article/components/photoswipe" $current }}
+{{ partial "article/components/mermaid" $current }}
+{{ end }}
+{{ end }}

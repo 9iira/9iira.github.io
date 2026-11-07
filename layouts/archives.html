@@ -52,7 +52,7 @@
               {{ if not .Date.IsZero }}
               <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format .Site.Params.dateFormat.published }}</time>
               {{ end }}
-              <span>{{ lang.FormatNumber 0 .WordCount }} 字</span>
+              <span>{{ lang.FormatNumber 0 (partial "story/word-count" .) }} 字</span>
             </footer>
           </div>
         </a>

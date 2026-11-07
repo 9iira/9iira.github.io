@@ -1,0 +1,7 @@
+{{- $chapters := slice -}}
+{{- with .Params.chapter_section -}}
+  {{- with site.GetPage . -}}
+    {{- $chapters = .RegularPages.ByWeight -}}
+  {{- end -}}
+{{- end -}}
+{{- return $chapters -}}

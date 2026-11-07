@@ -1,0 +1,16 @@
+<style>
+.story-panel { padding: var(--card-padding); background: var(--card-background); border-radius: var(--card-border-radius); box-shadow: var(--shadow-l1); color: var(--card-text-color-main); }
+.story-panel h2 { margin: 0 0 18px; font-size: 2rem; }
+.story-summary { margin: 0 0 16px; color: var(--card-text-color-secondary); }
+.story-chapter-list { margin: 0; padding-left: 1.5em; }
+.story-chapter-list li { padding: 10px 0; }
+.story-chapter-list small { display: block; margin-top: 6px; color: var(--card-text-color-secondary); }
+.story-panel a, .chapter-navigation a { color: var(--accent-color); }
+.chapter-navigation { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.chapter-navigation > * { min-width: 0; }
+.chapter-navigation a { padding: 8px 0; overflow-wrap: anywhere; }
+.chapter-navigation select { max-width: 100%; min-width: 0; flex: 1 1 180px; padding: 10px; border: 1px solid var(--card-text-color-tertiary); border-radius: 5px; color: var(--card-text-color-main); background: var(--card-background); font: inherit; }
+.chapter-navigation a:focus-visible, .chapter-navigation select:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
+.chapter-book-link { font-size: 1.5rem; color: var(--card-text-color-secondary); }
+.chapter-bottom { justify-content: space-between; }
+</style>

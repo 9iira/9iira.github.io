@@ -57,11 +57,11 @@
                     </time>
                 {{ end }}
 
-              {{ if eq $Page.Section "post" }}
-                  <span>{{ $Page.WordCount }} 字</span>
+              {{ if or (eq $Page.Section "post") (eq $Page.Layout "chapter") }}
+                  <span>{{ lang.FormatNumber 0 (partial "story/word-count" $Page) }} 字</span>
               {{ end }}
 
-                {{ if $showReadingTime }}
+                {{ if and $showReadingTime (not $Page.Params.chapter_section) }}
                     {{ partial "helper/icon" "clock" }}
                     <time class="article-time--reading">
                         {{ T "article.readingTime" $Page.ReadingTime }}

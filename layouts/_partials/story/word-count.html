@@ -1,0 +1,8 @@
+{{- $words := .WordCount -}}
+{{- if .Params.chapter_section -}}
+  {{- $words = 0 -}}
+  {{- range partial "story/chapters" . -}}
+    {{- $words = add $words .WordCount -}}
+  {{- end -}}
+{{- end -}}
+{{- return $words -}}

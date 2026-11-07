@@ -1,7 +1,7 @@
 
 {{ $totalWords := 0 }}
 {{ range where .Site.RegularPages "Section" "post" }}
-{{ $totalWords = add $totalWords .WordCount }}
+{{ $totalWords = add $totalWords (partial "story/word-count" .) }}
 {{ end }}
 <div id="blog-stats" class="powerby" style="margin-top: 0.4em;">
   <span id="blog-uptime"></span>
@@ -37,7 +37,7 @@
 })();
 </script>
 
-{{ if and .IsPage (eq .Section "post") }}
+{{ if and .IsPage (or (eq .Section "post") (eq .Layout "chapter")) (not .Params.chapter_section) }}
 <style>
   #reading-progress {
     position: fixed;

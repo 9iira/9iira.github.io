@@ -1,0 +1,21 @@
+{{ define "body-class" }}article-page{{ end }}
+{{ define "main" }}
+{{ partial "story/style" . }}
+{{ partial "article/article" . }}
+{{ $chapters := partial "story/chapters" . }}
+<section class="story-panel" aria-labelledby="story-contents">
+  <h2 id="story-contents">章节目录</h2>
+  <p class="story-summary">已发布 {{ len $chapters }} 章 · 共 {{ lang.FormatNumber 0 (partial "story/word-count" .) }} 字{{ with .Params.work_status }} · {{ . }}{{ end }}</p>
+  {{ with $chapters }}
+    <ol class="story-chapter-list">
+    {{ range . }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><small>{{ lang.FormatNumber 0 .WordCount }} 字{{ if not .Date.IsZero }} · {{ .Date | time.Format "2006-01-02" }}{{ end }}</small></li>
+    {{ end }}
+    </ol>
+  {{ else }}<p>章节准备中。</p>{{ end }}
+</section>
+{{ if not (eq .Params.comments false) }}{{ partial "comments/include" . }}{{ end }}
+{{ partialCached "footer/footer" . }}
+{{ partialCached "article/components/photoswipe" . }}
+{{ partial "article/components/mermaid" . }}
+{{ end }}
