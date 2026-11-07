@@ -2,7 +2,7 @@
 title: "念破"
 slug: nianpo
 description: "情不敢至深，恐大梦一场"
-date: 2026-11-07T00:00:00+01:00
+date: 2023-07-12T00:00:00+01:00
 draft: false
 layout: story
 chapter_section: /chapters/念破
