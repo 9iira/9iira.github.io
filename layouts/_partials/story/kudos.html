@@ -1,0 +1,90 @@
+{{- with .Site.Params.comments.waline.serverURL -}}
+<section class="story-panel work-kudos" data-server="{{ . }}" data-work="{{ $.RelPermalink }}" aria-label="整部作品的点心">
+  <button type="button" class="work-kudos-button" aria-label="给整部作品点心" aria-pressed="false" disabled>
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 20.4s-7.6-4.7-7.6-9.8a4.3 4.3 0 0 1 7.6-2.7 4.3 4.3 0 0 1 7.6 2.7c0 5.1-7.6 9.8-7.6 9.8z"/></svg>
+    <span class="work-kudos-count">…</span>
+  </button>
+  <span class="work-kudos-status" role="status" aria-live="polite"></span>
+</section>
+<style>
+.work-kudos { text-align: center; }
+.work-kudos-button { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; background: transparent; color: var(--card-text-color-main); border: 1px solid var(--card-text-color-tertiary); border-radius: 999px; cursor: pointer; font: inherit; }
+.work-kudos-button svg { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.work-kudos-button[aria-pressed="true"] svg { fill: currentColor; }
+.work-kudos-button:hover { border-color: currentColor; }
+.work-kudos-button:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
+.work-kudos-button:disabled { opacity: .6; cursor: wait; }
+.work-kudos-count { font-variant-numeric: tabular-nums; }
+.work-kudos-status { display: block; margin-top: 8px; font-size: 1.3rem; color: var(--card-text-color-secondary); }
+</style>
+<script>
+(() => {
+  const root = document.querySelector('.work-kudos');
+  if (!root) return;
+  const button = root.querySelector('button');
+  const count = root.querySelector('.work-kudos-count');
+  const status = root.querySelector('.work-kudos-status');
+  const server = root.dataset.server.replace(/\/$/, '');
+  const path = root.dataset.work;
+  // Use Waline's existing reaction0 counter and browser record.
+  const key = 'WALINE_REACTION';
+  let memory = {};
+  function records() {
+    try {
+      const data = JSON.parse(localStorage.getItem(key) || '{}');
+      if (data && typeof data === 'object' && !Array.isArray(data)) memory = data;
+    } catch {}
+    return memory;
+  }
+  function paint() {
+    const liked = records()[path] === 0;
+    button.setAttribute('aria-pressed', String(liked));
+    button.setAttribute('aria-label', liked ? '取消给整部作品的点心' : '给整部作品点心');
+  }
+  async function request(url, options) {
+    const response = await fetch(url, options);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    if (data && data.errno) throw new Error(data.errmsg || 'Waline error');
+    return data;
+  }
+  async function refresh() {
+    const query = new URLSearchParams({ path, type: 'reaction0', lang: 'zh-CN' });
+    const data = await request(server + '/article?' + query);
+    const value = typeof data === 'number' ? data : data && data.reaction0;
+    if (!Number.isFinite(value) || value < 0) throw new Error('Invalid reaction response');
+    count.textContent = String(value);
+  }
+  async function load() {
+    button.disabled = true;
+    try { await refresh(); status.textContent = ''; }
+    catch { count.textContent = '—'; status.textContent = '点心暂时加载失败，点击心形重试。'; }
+    finally { button.disabled = false; }
+  }
+  button.addEventListener('click', async () => {
+    if (button.disabled) return;
+    if (count.textContent === '—') { await load(); return; }
+    button.disabled = true;
+    status.textContent = '';
+    const liked = records()[path] === 0;
+    try {
+      await request(server + '/article?lang=zh-CN', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path, type: 'reaction0', action: liked ? 'desc' : 'inc' })
+      });
+      const data = records();
+      if (liked) delete data[path]; else data[path] = 0;
+      memory = data;
+      try { localStorage.setItem(key, JSON.stringify(data)); } catch {}
+      paint();
+      count.textContent = String(Math.max(0, Number(count.textContent) + (liked ? -1 : 1)));
+      status.textContent = liked ? '已取消点心' : '谢谢你的点心！';
+    } catch { status.textContent = '未能确认点心是否成功，请刷新页面后查看。'; }
+    finally { button.disabled = false; }
+  });
+  window.addEventListener('storage', event => { if (event.key === key) { paint(); load(); } });
+  paint();
+  load();
+})();
+</script>
+{{- end -}}

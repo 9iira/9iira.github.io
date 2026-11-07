@@ -24,6 +24,7 @@
   <a href="{{ .RelPermalink }}">返回作品目录</a>
   {{ if lt (add $position 1) (len $chapters) }}{{ with index $chapters (add $position 1) }}<a rel="next" href="{{ .RelPermalink }}">下一章 →</a>{{ end }}{{ end }}
 </nav>
+{{ partial "story/kudos" . }}
 {{ if not (eq $current.Params.comments false) }}{{ partial "comments/include" $current }}{{ end }}
 {{ partialCached "footer/footer" $current }}
 {{ partialCached "article/components/photoswipe" $current }}

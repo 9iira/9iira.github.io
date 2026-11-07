@@ -28,9 +28,7 @@
 {{- end -}}
 
 {{- if $.Params.work -}}
-  {{- with $.Site.GetPage $.Params.work -}}
-    {{- $config = merge $config (dict "path" .RelPermalink) -}}
-  {{- end -}}
+  {{- $config = merge $config (dict "path" $.RelPermalink "reaction" false) -}}
 {{- else if $.Params.chapter_section -}}
   {{- $config = merge $config (dict "path" $.RelPermalink) -}}
 {{- end -}}
