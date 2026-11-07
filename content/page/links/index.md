@@ -1,5 +1,5 @@
 ---
-title: Links
+title: Friends
 layout: links
 menu:
     main:
@@ -7,7 +7,12 @@ menu:
         params:
             icon: link
 comments: false
-links: []
+links:
+    - title: Curly Sheep
+      description: 卷毛羊的赛博羊圈
+      website: https://curly-sheep.netlify.app/
+
+
 ---
 
 这里收集一些朋友的博客。\
