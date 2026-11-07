@@ -2,7 +2,7 @@
 title: "Fur-ever"
 slug: Fur-ever
 description: "简介"
-date: 2026-11-07T00:00:00+01:00
+date: 2024-09-05T00:00:00+01:00
 draft: false
 layout: story
 chapter_section: /chapters/Fur-ever
