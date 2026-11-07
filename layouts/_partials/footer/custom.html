@@ -29,7 +29,7 @@
   function updateUptime() {
     const hours = Math.max(0, Math.floor((Date.now() - openedAt) / 3600000));
     const days = Math.floor(hours / 24);
-    uptime.textContent = `博客已运行 ${days} 天 ${hours % 24} 小时 · `;
+    uptime.textContent = `已运行 ${days} 天 · `;
   }
 
   updateUptime();
