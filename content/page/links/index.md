@@ -11,8 +11,8 @@ links:
     - title: Curly Sheep
       description: 卷毛羊的赛博羊圈
       website: https://curly-sheep.netlify.app/
-
-      - title: 同人旅居
+    
+    - title: 同人旅居
       description: 惊世大嬷嬷绝赞旅居中
       website: https://yamabito.fyi/
 
