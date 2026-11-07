@@ -1,7 +1,7 @@
 ---
 title: "国际亲吻日，好耶！"
 description: "简介！"
-date: 2026-11-06T20:00:00+01:00
+date: 2023-07-06T20:00:00+01:00
 draft: false
 categories:
   - 同人
