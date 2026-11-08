@@ -1,5 +1,6 @@
 ---
 title: "不亲吻就不能出去的房间"
+slug: no-kiss-no-life
 description: "啊啊简介"
 date: 2025-12-31T20:00:00+01:00
 draft: false
