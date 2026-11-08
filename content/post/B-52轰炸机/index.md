@@ -1,5 +1,6 @@
 ---
 title: "B-52轰炸机"
+slug: b-52
 description: "简介……！"
 date: 2024-10-21T20:00:00+01:00
 draft: false
