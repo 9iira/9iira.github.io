@@ -1,5 +1,6 @@
 ---
 title: "海へ"
+slug: go-to-the-sea
 description: "简介……"
 date: 2025-12-25T20:00:00+01:00
 draft: false
