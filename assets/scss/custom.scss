@@ -280,3 +280,14 @@ main.main > footer.site-footer {
     transform: rotate(10deg);
   }
 }
+
+/* 评论里的表情尺寸 */
+#waline .wl-content .vemoji,
+#waline .wl-content .wl-emoji {
+  display: inline-block;
+  vertical-align: baseline;
+  height: 2.35em;
+  width: auto;
+  max-height: none;
+  margin: -0.125em 0.25em;
+}
