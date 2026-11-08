@@ -115,6 +115,7 @@ comments: true
 
 “晚安。”
 
+{{< afterword-divider >}}
 
 <details>  
 <summary>一些作者碎碎念</summary>  
