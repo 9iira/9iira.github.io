@@ -58,7 +58,7 @@ SortBy              = "default"
     lang = "zh-CN"
     meta = ["nick", "mail"]
     search = false
-    
+    emoji = ["https://cdn.jsdelivr.net/gh/Saidosi/azuki-emoji-for-waline@1.0/azukisan/"]
     reaction = ["data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20.4s-7.6-4.7-7.6-9.8a4.3 4.3 0 0 1 7.6-2.7 4.3 4.3 0 0 1 7.6 2.7c0 5.1-7.6 9.8-7.6 9.8z' fill='none' stroke='%23444' stroke-width='1.6'/%3E%3C/svg%3E"]
 
 [comments.waline.locale]
