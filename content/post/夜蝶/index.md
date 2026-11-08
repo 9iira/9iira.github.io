@@ -1,5 +1,6 @@
 ---
 title: "夜蝶"
+slug: night-butterfly
 description: "简介，简介"
 date: 2024-07-26T20:00:00+01:00
 draft: false
