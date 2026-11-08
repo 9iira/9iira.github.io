@@ -69,8 +69,8 @@ SortBy              = "default"
     comment = "留言"
     login = "登记"
     logout = "离开"
-    nick = "昵称（这个得有）"
-    mail = "邮箱（这个可以没有）"
+    nick = "昵称"
+    mail = "邮箱"
 
     # See all the available configurations at https://github.com/CaiJimmy/hugo-theme-stack/blob/master/config/_default/params.toml
     # Copy the configurations you need from there and paste it here.
