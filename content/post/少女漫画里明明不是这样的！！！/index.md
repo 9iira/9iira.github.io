@@ -1,5 +1,6 @@
 ---
 title: "少女漫画里明明不是这样的！！！"
+slug: shojo-manga
 description: "什么简介"
 date: 2026-01-15T20:00:00+01:00
 draft: false
