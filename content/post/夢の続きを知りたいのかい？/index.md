@@ -1,5 +1,6 @@
 ---
 title: "夢の続きを知りたいのかい？"
+slug: dreamless
 description: "忘记我简介写的什么了（"
 date: 2026-11-06T20:00:00+01:00
 draft: false
