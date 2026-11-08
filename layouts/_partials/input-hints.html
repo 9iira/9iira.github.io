@@ -1,0 +1,60 @@
+{{/* 提示文字在下面的 hints 中修改。此文件不会修改输入框里的实际内容。 */}}
+<style>
+.search-form input[name="keyword"]::placeholder,
+#waline input.wl-nick::placeholder,
+#waline input.wl-mail::placeholder {
+  color: var(--card-text-color-secondary, #66717c);
+  opacity: .8;
+}
+/* 保留标签供屏幕阅读器使用，视觉提示改由 placeholder 显示。 */
+#waline .wl-header-item.has-input-hint > label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+#waline .wl-header-item.has-input-hint > input {
+  min-width: 0;
+  width: 100%;
+}
+</style>
+<script>
+(() => {
+  const hints = {
+    search: '输入关键词搜索……',
+    nick: '这个得有',
+    mail: '这个可以没有'
+  };
+
+  function applyHints() {
+    document.querySelectorAll('.search-form input[name="keyword"]').forEach(input => {
+      if (input.placeholder !== hints.search) input.placeholder = hints.search;
+      if (!input.hasAttribute('aria-label')) input.setAttribute('aria-label', '搜索文章');
+    });
+    ['nick', 'mail'].forEach(name => {
+      document.querySelectorAll('#waline input.wl-' + name).forEach(input => {
+        if (input.placeholder !== hints[name]) input.placeholder = hints[name];
+        input.closest('.wl-header-item')?.classList.add('has-input-hint');
+      });
+    });
+  }
+
+  function start() {
+    applyHints();
+    // Waline 可能稍后加载，退出登录或打开回复框时也会重新创建输入框。
+    const observer = new MutationObserver(applyHints);
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('pageshow', applyHints);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();
+</script>
